@@ -2,12 +2,12 @@
 
 An educational, reproducible comparison of AlphaFold Server predictions for
 the wild-type and T790M-mutant human EGFR kinase domain with ATP and magnesium.
-The project compares published model-confidence outputs and measures the
+The project compares model-confidence outputs and measures the
 minimum heavy-atom distance from residue 79 of the modeled domain (full-length
 EGFR residue 790) to ATP in each top-ranked structure.
 
-> **AlphaFold Server output notice:** The structure and confidence files in this
-> repository are AlphaFold Server output, subject to the
+> **AlphaFold Server output notice:** The structure, confidence, and screenshot
+> files in this repository are AlphaFold Server output, subject to the
 > [AlphaFold Server Output Terms of Use](https://alphafoldserver.com/output-terms).
 > They are for non-commercial, theoretical modeling only; they are not for
 > clinical use or automated ligand-binding prediction, docking, or screening.
@@ -34,6 +34,40 @@ establish that the mutation changes ATP binding or drug response.
 | 2 | 0.930 | 0.900 | 0.940 | 0.920 | 0.880 | 0.920 |
 | 3 | 0.930 | 0.900 | 0.940 | 0.910 | 0.880 | 0.920 |
 | 4 | 0.930 | 0.900 | 0.940 | 0.910 | 0.880 | 0.920 |
+
+## AlphaFold Server screenshots
+
+These are direct screenshots of the completed job pages for the top-ranked
+(`model_0`) predictions. Each page shows the job name and its pTM/ipTM scores,
+the server's 3D predicted-structure viewer, and a predicted aligned error (PAE)
+heatmap. The viewer is in its default orientation; neither screenshot selects
+or labels residue 79, ATP, or Mg2+, so the pictures do not demonstrate a
+specific residue-ligand contact.
+
+The pTM/ipTM values are model-confidence metrics, not probabilities that a
+biological interaction is true. The PAE heatmap shows the model's predicted
+positional error across residue pairs; it is not experimental density. The
+residue-to-ATP distances in the summary above were calculated separately from
+the downloaded CIF coordinates by `measure_atp_pocket.py`, not estimated from
+these images.
+
+### Wild type (`EGFR_WT_ATP`, model 0)
+
+![AlphaFold Server result page for EGFR_WT_ATP model 0. The page displays pTM 0.90 and ipTM 0.94, a predicted protein-complex view, and a PAE heatmap.](screenshots/egfr_wt_model_0.png)
+
+The page reports **pTM = 0.90** and **ipTM = 0.94**. The structure coordinates
+and confidence data are available in the
+[model 0 CIF](EGFR_WT_ATP/fold_egfr_wt_atp_model_0.cif) and
+[model 0 confidence JSON](EGFR_WT_ATP/fold_egfr_wt_atp_summary_confidences_0.json).
+
+### T790M mutant (`EGFR_T790M_ATP`, model 0)
+
+![AlphaFold Server result page for EGFR_T790M_ATP model 0. The page displays pTM 0.88 and ipTM 0.93, a predicted protein-complex view, and a PAE heatmap.](screenshots/egfr_t790m_model_0.png)
+
+The page reports **pTM = 0.88** and **ipTM = 0.93**. The structure coordinates
+and confidence data are available in the
+[model 0 CIF](EGFR_T790M_ATP/fold_egfr_t790m_atp_model_0.cif) and
+[model 0 confidence JSON](EGFR_T790M_ATP/fold_egfr_t790m_atp_summary_confidences_0.json).
 
 ## Workflow
 
@@ -78,6 +112,9 @@ folders.
 ├── prep_sequences.py
 ├── compare_confidences.py
 ├── measure_atp_pocket.py
+├── screenshots/
+│   ├── egfr_wt_model_0.png
+│   └── egfr_t790m_model_0.png
 ├── EGFR_WT_ATP/
 │   ├── *_model_0.cif ... *_model_4.cif
 │   ├── *_summary_confidences_*.json
